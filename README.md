@@ -75,7 +75,6 @@ screenshots_enabled:=<boolean>
     default: false
     options: true, false
     info: Requires start_bullet_viewer:=true. Controls if screenshots of the trial are made, and video created at the end.
-
 ```
 
 Model usage arguments:
