@@ -1,0 +1,10 @@
+# define the goal
+string[] gripper_names
+smmap_msgs/VectorPose[] poses_to_test # Note that each entry in this vector should be N poses, where N is the number of grippers
+---
+# define the result
+# (empty)
+---
+# define the feedback
+uint64 test_id
+smmap_msgs/SimulatorFeedback sim_state

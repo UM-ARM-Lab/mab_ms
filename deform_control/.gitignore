@@ -1,0 +1,7 @@
+# Editor temporary files
+*~
+*.swp
+
+# Compilation files
+build
+tags

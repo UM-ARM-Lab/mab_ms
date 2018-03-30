@@ -1,0 +1,35 @@
+<launch>
+    <param name="deformable_type"       value="cloth"/>
+    <param name="task_type"             value="wafr"/>
+
+    <param name="cloth_com_x"           value="-0.2"/>
+    <param name="cloth_com_z"           value="0.86"/>
+
+    <param name="cloth_x_size"          value="0.625"/>
+    <param name="cloth_num_divs_x"      value="50"/>
+
+    <param name="cloth_y_size"          value="0.5"/>
+    <param name="cloth_num_divs_y"      value="40"/>
+
+    <!--param name="cloth_x_size"          value="0.5"/>
+    <param name="cloth_num_divs_x"      value="45"/>
+
+    <param name="cloth_y_size"          value="0.5"/>
+    <param name="cloth_num_divs_y"      value="45"/-->
+
+    <param name="cloth_cylinder_com_x"   value="-0.5"/>
+
+    <param name="world_x_step"          value="0.0125"/>
+    <param name="world_x_min"           value="-0.80"/>
+    <param name="world_x_max"           value="-0.07"/>
+
+    <param name="world_y_step"          value="0.0125"/>
+
+    <param name="world_z_step"          value="0.0125"/>
+    <param name="world_z_min"           value="0.7775"/>
+    <param name="world_z_max"           value="0.9775"/>
+
+    <group ns="deform_simulator_node">
+        <param name="num_simsteps_per_gripper_command"  value="20"/>
+    </group>
+</launch>

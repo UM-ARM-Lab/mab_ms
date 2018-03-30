@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <name>osg_works</name>
+  <version>0.0.1</version>
+  <description>Catkin package for OSG Works version 2.0</description>
+  <maintainer email="dale.mcconachie@ssengineering.ca">Dale McConachie</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>OpenSceneGraph</build_depend>
+
+  <run_depend>OpenSceneGraph</run_depend>
+
+  <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- You can specify that this package is a metapackage here: -->
+    <!-- <metapackage/> -->
+
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
+</package>

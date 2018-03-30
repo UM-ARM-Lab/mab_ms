@@ -1,0 +1,4 @@
+<launch>
+    <param name="deformable_type" value="cloth"/>
+    <param name="task_type" value="cylinder_coverage"/>
+</launch>
