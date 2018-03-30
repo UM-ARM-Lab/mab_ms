@@ -177,7 +177,7 @@ correlation_strength_factor:=<double>
     info: Requires kalman_parameters_override:=true correlation_strength_factor_override:=true.
 ```
 
-## F.A.Q
+## F.A.Q.
 
 #### I get the following error `[generic_experiment.launch] is neither a launch file in package [smmap] nor is [smmap] a launch file name`, what is wrong?
 Double check that you have built and sourced your catkin workspace correctly.
