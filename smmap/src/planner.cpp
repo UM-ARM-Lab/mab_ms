@@ -37,7 +37,6 @@ Planner::Planner(
     , reward_std_dev_scale_factor_(1.0)
     , process_noise_factor_(GetProcessNoiseFactor(ph_))
     , observation_noise_factor_(GetObservationNoiseFactor(ph_))
-    , max_correlation_strength_factor_(GetMaxCorrelationStrengthFactor(ph_))
     , correlation_strength_factor_(GetCorrelationStrengthFactor(ph_))
     , seed_(GetPlannerSeed(ph_))
     , generator_(seed_)
@@ -84,7 +83,6 @@ void Planner::createBandits()
 /**
  * @brief Planner::getNextTrajectory
  * @param world_current_state
- * @param planning_horizion
  * @param dt
  * @param max_gripper_velocity
  * @param obstacle_avoidance_scale

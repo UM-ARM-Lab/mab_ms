@@ -28,10 +28,7 @@ Task::Task(RobotInterface& robot,
 
 void Task::execute()
 {
-    const int planning_horizion = GetPlanningHorizon(ph_);
-
     // Run the planner at whatever rate we've been given
-    ROS_INFO_STREAM_NAMED("task", "Running our planner with a horizion of " << planning_horizion);
     WorldState world_feedback = robot_.start();
     const double start_time = world_feedback.sim_time_;
 

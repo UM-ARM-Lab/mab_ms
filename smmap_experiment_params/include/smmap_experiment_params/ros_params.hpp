@@ -599,11 +599,6 @@ namespace smmap
         return ROSHelpers::GetParam(nh, "adaptive_model_learning_rate", 1e-6);
     }
 
-    inline int GetPlanningHorizon(ros::NodeHandle& nh)
-    {
-        return ROSHelpers::GetParam(nh, "planning_horizion", 1);
-    }
-
     inline double GetProcessNoiseFactor(ros::NodeHandle& nh)
     {
         return ROSHelpers::GetParam(nh, "process_noise_factor", 0.1);
@@ -617,11 +612,6 @@ namespace smmap
     inline double GetCorrelationStrengthFactor(ros::NodeHandle& nh)
     {
         return ROSHelpers::GetParam(nh, "correlation_strength_factor", 0.9);
-    }
-
-    inline double GetMaxCorrelationStrengthFactor(ros::NodeHandle& nh)
-    {
-        return ROSHelpers::GetParam(nh, "max_correlation_strength_factor", GetCorrelationStrengthFactor(nh));
     }
 
     inline bool GetOptimizationEnabled(ros::NodeHandle& nh)

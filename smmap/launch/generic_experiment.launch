@@ -21,7 +21,6 @@
 
     <!-- Planner internal arguments -->
     <arg name="launch_planner"                          default="true"/>
-    <arg name="planning_horizon"                        default="1"/>
     <arg name="optimization_enabled"                    default="true"/>
     <arg name="kalman_parameters_override"              default="false"/>
     <arg name="process_noise_factor"                    if="$(arg kalman_parameters_override)"/>
@@ -32,7 +31,6 @@
     <arg name="static_seed"                             if="$(arg static_seed_override)"/>
     <arg name="correlation_strength_factor_override"    default="false"/>
     <arg name="correlation_strength_factor"             if="$(arg static_seed_override)"/>
-    <arg name="max_correlation_strength_factor"         default="0.9"/>
 
     <!-- Setup task parameters -->
     <include file="$(find smmap)/launch/$(arg task_type)_params.launch"/>
@@ -51,8 +49,7 @@
 
     <!-- Start the planner -->
     <group ns="smmap_planner_node">
-        <param name="planning_horizon"                  value="$(arg planning_horizon)"                 type="int"/>
-        <param name="optimization_enabled"              value="$(arg optimization_enabled)"             type="bool"/>
+`        <param name="optimization_enabled"              value="$(arg optimization_enabled)"             type="bool"/>
         <param name="use_multi_model"                   value="$(arg multi_model)"                      type="bool"/>
         <param name="translational_deformability"       value="$(arg translational_deformability)"      type="double"   if="$(arg deformability_override)"/>
         <param name="rotational_deformability"          value="$(arg rotational_deformability)"         type="double"   if="$(arg deformability_override)"/>
@@ -64,7 +61,6 @@
         <param name="use_random_seed"                   value="$(arg use_random_seed)"                  type="bool"/>
         <param name="static_seed"                       value="$(arg static_seed)"                      type="string"   if="$(arg static_seed_override)"/>
         <param name="correlation_strength_factor"       value="$(arg correlation_strength_factor)"      type="double"   if="$(arg correlation_strength_factor_override)"/>
-        <param name="max_correlation_strength_factor"   value="$(arg max_correlation_strength_factor)"  type="double"/>
     </group>
 
     <node name="smmap_planner_node" pkg="smmap" type="smmap_test_node_$(arg bandit_algorithm)" required="true" if="$(arg launch_planner)"/>
