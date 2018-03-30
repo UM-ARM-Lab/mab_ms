@@ -10,19 +10,20 @@ This repository contains several catkin based packages for testing models and MA
 
 ## Dependencies and Install Details
 * This code has been tested on [Ubuntu 16.04](https://www.ubuntu.com/download/desktop) with [ROS Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu)
-* Each folder is a catkin pacakge, as such this can be added directly to an existing catkin workspace, or used in a new workspace. There are no other packages needed beyond those installed as part of the ros-kinetic-desktop-full package.
+* Each folder is a catkin pacakge, as such this can be added directly to an existing catkin workspace, or used in a new workspace. There are no other ROS packages needed beyond those installed as part of the ros-kinetic-desktop-full package.
+* Requires some common libraries such as Eigen. If you find one that is not installed on Ubuntu 16.04 by default, please open and ticket and we will update this list.
 * [Gurobi](https://www.gurobi.com)  
   Get academic license  
-  Download and [follow installation instructions for 7.0.X](http://www.gurobi.com/documentation/7.0/quickstart_linux/software_installation_guid.html#section:Installation) (extract to /opt, add some lines to .bashrc)  
+  Download and [follow installation instructions for 7.0.X](http://www.gurobi.com/documentation/7.0/quickstart_linux/software_installation_guid.html#section:Installation) (extract to /opt; add some lines to .bashrc; run `grbgetkey`)
   Switch to using the g++5.2 version: `cd ${GUROBI_HOME}/lib ` `ln -sf libgurobi_g++5.2.a libgurobi_c++.a`
 * mencoder (for generating videos from the simulated experiments): `sudo apt install mencoder`
 * `imToMov.sh` needs to be added to the system path somewhere (used in conjuction with mencoder for generating videos). E.g.: `sudo cp imToMov.sh /usr/local/bin`
 
 ## Running an experiment
 Each experiment uses the same base launch file, and specifies an extra launch file containing parameters specific to that experiment:
-* `roslaunch smmap generic_experiment.launch task_type:=rope_cylinder`
-* `roslaunch smmap generic_experiment.launch task_type:=cloth_table`
-* `roslaunch smmap generic_experiment.launch task_type:=cloth_wafr`
+* `roslaunch smmap generic_experiment.launch task_type:=rope_cylinder --screen`
+* `roslaunch smmap generic_experiment.launch task_type:=cloth_table --screen`
+* `roslaunch smmap generic_experiment.launch task_type:=cloth_wafr --screen`
 
 ## Logging data
 By default, the launch files are setup to log data to `./logs/<task_type>/default`. This will overwrite any data that exists in this folder automatically without prompting. Similarly when screenshots are enabled (see below), the folder `/tmp/smmap_screenshots` will be cleared and recreated every trial.
@@ -175,3 +176,34 @@ correlation_strength_factor:=<double>
     options: [0, 1]
     info: Requires kalman_parameters_override:=true correlation_strength_factor_override:=true.
 ```
+
+## F.A.Q
+
+#### I get the following error `[generic_experiment.launch] is neither a launch file in package [smmap] nor is [smmap] a launch file name`, what is wrong?
+Double check that you have built and sourced your catkin workspace correctly.
+
+#### I get the following error and then the simulator closes!
+```
+================================================================================
+REQUIRED process [deform_simulator_node-2] has died!
+process has finished cleanly
+log file: ~/.ros/log/30ea73d4-3465-11e8-a8bb-0cc47ac81363/deform_simulator_node-2*.log
+Initiating shutdown!
+================================================================================
+```
+
+Check if this message is preceeded by `terminate_simulation_topic not set! Using default of terminate_simulation`. If so, this is normal shutdown behaviour. We have setup the launch files to automatically close everything at the end of a trial to enable batch trials. If not, check to see what happened immediately prior to everything shutting down.
+
+#### The simulator closes almost immedately, and Eigen assertions are failing!
+
+Is the message similar to this?
+```
+[/smmap_planner_node ros.smmap.planner]: ------------------------------------------------------------------------------------
+[/smmap_planner_node ros.smmap.task]: Determining desired direction
+[/smmap_planner_node ros.smmap.direct_coverage_task]: Finding 'best' object delta
+[/smmap_planner_node ros.smmap.target_point_task]: Found best delta in 0.00554037 seconds
+Error code = 10009
+No Gurobi license found (user dmcconac, host thor, hostid 7ac81363)
+smmap_test_node_KFMANB: /usr/include/eigen3/Eigen/src/Core/Block.h:148: Eigen::Block<XprType, BlockRows, BlockCols, InnerPanel>::Block(XprType&, Eigen::Index, Eigen::Index, Eigen::Index, Eigen::Index) [with XprType = Eigen::Matrix<double, -1, 1>; int BlockRows = 6; int BlockCols = 1; bool InnerPanel = false; Eigen::Index = long int]: Assertion `startRow >= 0 && blockRows >= 0 && startRow <= xpr.rows() - blockRows && startCol >= 0 && blockCols >= 0 && startCol <= xpr.cols() - blockCols' failed.
+```
+Check your [Gurobi licence](http://www.gurobi.com/documentation/7.0/quickstart_linux/software_installation_guid.html#section:Installation)
